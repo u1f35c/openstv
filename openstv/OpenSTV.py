@@ -181,7 +181,6 @@ class Frame(wx.Frame):
     self.console = wx.TextCtrl(self.notebook, -1,
                                style=wx.TE_MULTILINE|wx.TE_READONLY|\
                                wx.TE_WORDWRAP|wx.FIXED|wx.TE_RICH2)
-    self.console.SetMaxLength(0)
     ps = self.console.GetFont().GetPointSize()
     font = wx.Font(ps, wx.MODERN, wx.NORMAL, wx.NORMAL)
     self.console.SetFont(font)
@@ -384,7 +383,6 @@ to www.OpenSTV.org, or send an email to OpenSTV@googlegroups.com.
     # create a new notebook page
     tc = wx.TextCtrl(self.notebook, -1,
                      style=wx.TE_MULTILINE|wx.TE_READONLY|wx.HSCROLL|wx.FIXED)
-    tc.SetMaxLength(0)
     ps = tc.GetFont().GetPointSize()
     font = wx.Font(ps, wx.MODERN, wx.NORMAL, wx.NORMAL)
     tc.SetFont(font)
@@ -437,7 +435,7 @@ to www.OpenSTV.org, or send an email to OpenSTV@googlegroups.com.
       return
 
     dlg = wx.FileDialog(self, "Save Results in CSV Format",
-                        style=wx.SAVE|wx.OVERWRITE_PROMPT|wx.CHANGE_DIR)
+                        style=wx.FD_SAVE|wx.FD_OVERWRITE_PROMPT|wx.FD_CHANGE_DIR)
     if dlg.ShowModal() != wx.ID_OK:
       dlg.Destroy()
       return
@@ -457,7 +455,7 @@ to www.OpenSTV.org, or send an email to OpenSTV@googlegroups.com.
       return
 
     dlg = wx.FileDialog(self, "Save Results in Text Format",
-                        style=wx.SAVE|wx.OVERWRITE_PROMPT|wx.CHANGE_DIR)
+                        style=wx.FD_SAVE|wx.FD_OVERWRITE_PROMPT|wx.FD_CHANGE_DIR)
     if dlg.ShowModal() != wx.ID_OK:
       dlg.Destroy()
       return
@@ -481,7 +479,7 @@ to www.OpenSTV.org, or send an email to OpenSTV@googlegroups.com.
       return
 
     dlg = wx.FileDialog(self, "Save Results in HTML Format",
-                        style=wx.SAVE|wx.OVERWRITE_PROMPT|wx.CHANGE_DIR)
+                        style=wx.FD_SAVE|wx.FD_OVERWRITE_PROMPT|wx.FD_CHANGE_DIR)
     if dlg.ShowModal() != wx.ID_OK:
       dlg.Destroy()
       return
@@ -646,7 +644,7 @@ See the Help menu for more information about the available methods.""")
 
   def OnFilenameSelect(self, event):
     dlg = wx.FileDialog(self, "Select Input File", "",
-                        style=wx.OPEN|wx.CHANGE_DIR)
+                        style=wx.FD_OPEN|wx.FD_CHANGE_DIR)
     if dlg.ShowModal() != wx.ID_OK:
       dlg.Destroy()
       return
@@ -890,7 +888,6 @@ class HTMLFrame(wx.Frame):
 class App(wx.App):
 
   def OnInit(self):
-    wx.InitAllImageHandlers()
 
     # Show a splash screen
     png = os.path.join(getHome(), "Icons", "splash.png")

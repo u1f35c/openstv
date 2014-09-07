@@ -58,7 +58,7 @@ class BFEFrame(wx.Frame):
     # Edit an existing ballot file
     elif mode == "old":
       dlg = wx.FileDialog(self, "Edit Ballot File",
-                          style=wx.OPEN|wx.CHANGE_DIR)
+                          style=wx.FD_OPEN|wx.FD_CHANGE_DIR)
       if dlg.ShowModal() != wx.ID_OK:
         dlg.Destroy()
         self.Destroy()
@@ -96,7 +96,6 @@ class BFEFrame(wx.Frame):
     self.log = wx.TextCtrl(nb, -1,
                            style=wx.TE_MULTILINE|wx.TE_READONLY|\
                            wx.TE_WORDWRAP|wx.FIXED)
-    self.log.SetMaxLength(0)
     nb.AddPage(self.log, "Log")
 
     # Initialize
@@ -158,7 +157,7 @@ class BFEFrame(wx.Frame):
 
     # Get the filename of the ballots to be appended
     dlg = wx.FileDialog(self, "Select Ballot File",
-                        style=wx.OPEN|wx.CHANGE_DIR)
+                        style=wx.FD_OPEN|wx.FD_CHANGE_DIR)
     if dlg.ShowModal() != wx.ID_OK:
       dlg.Destroy()
       return
@@ -197,7 +196,7 @@ class BFEFrame(wx.Frame):
 
     # Ask the user to choose the filename.
     dlg = wx.FileDialog(self, "Save Ballot File",
-                        style=wx.SAVE|wx.OVERWRITE_PROMPT|wx.CHANGE_DIR)
+                        style=wx.FD_SAVE|wx.FD_OVERWRITE_PROMPT|wx.FD_CHANGE_DIR)
     if dlg.ShowModal() != wx.ID_OK:
       dlg.Destroy()
       return
@@ -233,7 +232,7 @@ class BFEFrame(wx.Frame):
 
   def OnSaveLogAs(self, event):
     dlg = wx.FileDialog(self, "Save Log to a File",
-                        style=wx.SAVE|wx.OVERWRITE_PROMPT|wx.CHANGE_DIR)
+                        style=wx.FD_SAVE|wx.FD_OVERWRITE_PROMPT|wx.FD_CHANGE_DIR)
     if dlg.ShowModal() != wx.ID_OK:
       dlg.Destroy()
       return
