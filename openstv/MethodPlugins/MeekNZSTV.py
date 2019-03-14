@@ -242,7 +242,7 @@ number generator for breaking ties.</p>
         desc = "Candidate %s was chosen by breaking the tie randomly. " % \
               self.b.names[c]
         return (c, desc)
-    raise RuntimeError, "Internal error breaking strong tie."
+    raise RuntimeError("Internal error breaking strong tie.")
 
   #  Differs from MeekSTV in that it rounds up the intermediate
   #  keep factor calculation.

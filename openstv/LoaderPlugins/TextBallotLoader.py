@@ -93,10 +93,10 @@ class TextBallotLoader(LoaderPlugin):
     f = open(self.fName, "w")
 
     if not ballotList.isalnum():
-      raise RuntimeError, """\
+      raise RuntimeError("""\
 Can't save ballots in text format.  The
 candidates' names must be alphanumeric with
-no white space."""
+no white space.""")
 
     if packed:
       for i in xrange(ballotList.numWeightedBallots):

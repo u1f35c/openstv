@@ -43,7 +43,7 @@ Usage:
 # Parse the command line.
 try:
   (opts, args) = getopt.getopt(sys.argv[1:], "Pp:r:s:t:w:x:")
-except getopt.GetoptError, err:
+except getopt.GetoptError as err:
   print str(err) # will print something like "option -a not recognized"
   print usage
   sys.exit(1)
@@ -111,7 +111,7 @@ try:
   if numSeats:
     dirtyBallots.numSeats = numSeats
   cleanBallots = dirtyBallots.getCleanBallots()
-except RuntimeError, msg:
+except RuntimeError as msg:
   print msg
   sys.exit(1)
 

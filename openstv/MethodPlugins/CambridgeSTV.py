@@ -484,10 +484,10 @@ voters as may request them.</p>
     
     OrderDependentSTV.checkMinRequirements(self)
     if self.b.numBallots < self.batchCutoff * self.numSeats:
-      raise RuntimeError, """\
+      raise RuntimeError("""\
 Not enough ballots to run an election.
 Need at least %d ballots but have only %d.""" % (
-        self.batchCutoff*self.numSeats, self.b.numBallots)
+        self.batchCutoff*self.numSeats, self.b.numBallots))
     
   def updateCount(self):
     "Update the vote totals after a transfer of votes."

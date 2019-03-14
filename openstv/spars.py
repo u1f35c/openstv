@@ -174,7 +174,7 @@ def probDist(n, low = 0.8, high=1.0):
   get probabilities in the desired entropy range."""
 
   if high > 1.0 or high < low or low < 0.0:
-    raise RuntimeError, "high and low must be in [0,1]."
+    raise RuntimeError("high and low must be in [0,1].")
 
   eMax = entropy([1.0/n]*n)
   eLow = eMax * low
@@ -271,7 +271,7 @@ class Spars:
         for c in self.c:
           self.p[c][d] -= mean[d]
     else:
-      raise RuntimeError, "No such normalization."    
+      raise RuntimeError("No such normalization.")
 
   def orderByDistance(self, x):
     "Return a list of canidates in order of proximity to a point."
@@ -337,7 +337,7 @@ class Spars:
     xbins = 2*ybins # gives a decent aspect ratio
 
     if self.d != 2:
-      raise RuntimeError, "Only implemented for two dimensions."
+      raise RuntimeError("Only implemented for two dimensions.")
 
     # create the background axis
     graph = []
@@ -425,7 +425,7 @@ class Bigrams:
     elif x == "NOTA = 0":
       self.NOTA = 0
     else:
-      raise RuntimeError, "Bad format in bigram file: %s" % (x)
+      raise RuntimeError("Bad format in bigram file: %s" % (x))
 
     # load candidate names
     x = f.readline()
@@ -438,27 +438,27 @@ class Bigrams:
       x = f.readline()
       y = re.match(r"\s*P\s*\(\s*len\s*=\s*(\d+)\s*\)\s*=\s*(0?\.\d+)", x)
       if y is None:
-        raise RuntimeError, "Bad format in bigram file %s: %s" % (fName, x)
+        raise RuntimeError("Bad format in bigram file %s: %s" % (fName, x))
       if int(y.group(1)) != i+1:
-        raise RuntimeError, "Bad format in bigram file %s: %s" % (fName, x)
+        raise RuntimeError("Bad format in bigram file %s: %s" % (fName, x))
       p = float(y.group(2))
       self.plength[i] = p
 
     # check that they add to 1
     s = sum(self.plength)
     if abs(s-1) > eps:
-      raise RuntimeError, "Length probabilities must sum to exactly 1."
+      raise RuntimeError("Length probabilities must sum to exactly 1.")
 
     # load p1 and p2
     for i in range(n):
       x = f.readline()
       y = re.match(r"\s*P\s*\(\s*(\S+)\s*\)\s*=\s*(0?\.\d+)", x)
       if y is None:
-        raise RuntimeError, "Bad format in bigram file %s: %s" % (fName, x)
+        raise RuntimeError("Bad format in bigram file %s: %s" % (fName, x))
       c = y.group(1)
       p = float(y.group(2))
       if c not in self.c:
-        raise RuntimeError, "Bad format in bigram file %s: %s" % (fName, x)
+        raise RuntimeError("Bad format in bigram file %s: %s" % (fName, x))
       self.p1[c] = p
       self.p2[c] = {}
 
@@ -466,13 +466,13 @@ class Bigrams:
         x = f.readline()
         y = re.match(r"\s*P\s*\(\s*(\S+)\s*\|\s*(\S*)\s*\)\s*=\s*(0?\.\d+)", x)
         if y is None:
-          raise RuntimeError, "Bad format in bigram file %s: %s" % (fName, x)
+          raise RuntimeError("Bad format in bigram file %s: %s" % (fName, x))
         if c != y.group(2):
-          raise RuntimeError, "Bad format in bigram file %s: %s" % (fName, x)
+          raise RuntimeError("Bad format in bigram file %s: %s" % (fName, x))
         c2 = y.group(1)
         p = float(y.group(3))
         if (c2 not in self.c) or (c == c2):
-          raise RuntimeError, "Bad format in bigram file %s: %s" % (fName, x)
+          raise RuntimeError("Bad format in bigram file %s: %s" % (fName, x))
         self.p2[c][c2] = p
 
     f.close()
@@ -482,24 +482,24 @@ class Bigrams:
       for c in self.c:
         s = sum(self.p2[c].values())
         if s > 1:
-          raise RuntimeError, "Conditional probabilities for %s sum to greater than 1." % (c)
+          raise RuntimeError("Conditional probabilities for %s sum to greater than 1." % (c))
         self.p2[c]["NOTA"] = 1 - s
 
     s = sum(self.p1.values())
     if abs(s-1) > eps:
-      raise RuntimeError, "First place probabilities must sum to exactly 1."
+      raise RuntimeError("First place probabilities must sum to exactly 1.")
 
     for c in self.c:
       s = sum(self.p2[c].values())
       if abs(s-1) > eps:
-        raise RuntimeError, "Conditional probabilities for %s must sum to exactly 1." % (c)
+        raise RuntimeError("Conditional probabilities for %s must sum to exactly 1." % (c))
 
   def save(self, fName):
     "Save bigrams to a file."
 
     self.fName = fName
     if os.path.exists(fName):
-      raise RuntimeError, "I won't overwrite the file: " + fName
+      raise RuntimeError("I won't overwrite the file: " + fName)
 
     f = open(fName, "w")
 
@@ -621,7 +621,7 @@ class Bigrams:
 
     if ( (type(levels) is not IntType) or 
          (levels not in range(1, len(self.c)-1)) ):
-      raise RuntimeError, "Parameter 'levels' must be an integer between 1 and len(candidates)-2, inclusive."
+      raise RuntimeError("Parameter 'levels' must be an integer between 1 and len(candidates)-2, inclusive.")
 
     # Fill in big data structure with all partial counts
     par_count = []
@@ -800,7 +800,7 @@ class Ballots(STV.Ballots):
       elif model.pars == "spars":
         ballot = self.genFromSpars(model)
       else:
-        raise RuntimeError, "Can't generate ballots from this object."
+        raise RuntimeError("Can't generate ballots from this object.")
       self.raw.append(ballot)
 
     self.pack()
@@ -859,7 +859,7 @@ class Ballots(STV.Ballots):
     be reexamined.  """
     
     if self.c != b.c:
-      raise RuntimeError, "Ballots have different candidates."
+      raise RuntimeError("Ballots have different candidates.")
 
     nc = len(self.c)
 
