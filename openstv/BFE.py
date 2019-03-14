@@ -356,7 +356,7 @@ class BallotsPanel(wx.Panel):
     numCandidatesC = wx.StaticText(self, -1, "%d" % self.b.numCandidates)
     titleL = wx.StaticText(self, -1, "Title:")
     title = ""
-    if vars(self.b).has_key("title"): 
+    if "title" in vars(self.b):
       title = self.b.title
     titleC = wx.TextCtrl(self, -1, title)
     self.Bind(wx.EVT_TEXT, self.OnTitle, titleC)

@@ -288,16 +288,16 @@ number generator for breaking ties.</p>
     "Update message for this round"
     if self.roundInfo[self.R]["action"][0] == "first":
       text = "Count of first choices. "
-    elif self.roundInfo[self.R].has_key("surplus") and \
-         self.roundInfo[self.R].has_key("eliminate"):
+    elif "surplus" in self.roundInfo[self.R] and \
+         "eliminate" in self.roundInfo[self.R]:
       text = self.roundInfo[self.R]["eliminate"] + \
            self.roundInfo[self.R]["surplus"]
-    elif self.roundInfo[self.R].has_key("surplus"):
+    elif "surplus" in self.roundInfo[self.R]:
       text = self.roundInfo[self.R]["surplus"]
-    elif self.roundInfo[self.R].has_key("eliminate"):
+    elif "eliminate" in self.roundInfo[self.R]:
       text = self.roundInfo[self.R]["eliminate"]
 
-    if self.roundInfo[self.R].has_key("winners"):
+    if "winners" in self.roundInfo[self.R]:
       text += self.roundInfo[self.R]["winners"]
 
     self.msg[self.R] = text

@@ -635,7 +635,7 @@ class Bigrams:
           continue # ballot is too short
 
         current = ballot[level]
-        if not par_count[level].has_key(current):
+        if current not in par_count[level]:
           par_count[level][current] = {}
 
         if level == 0:
@@ -644,14 +644,14 @@ class Bigrams:
           tmp = ballot[:level]
           tmp.sort()
           previous = string.join(tmp)
-        if not par_count[level][current].has_key(previous):
+        if previous not in par_count[level][current]:
           par_count[level][current][previous] = {}
 
         if len(ballot[i]) < level+2:
           next = "NOTA"
         else:
           next = ballot[level+1]
-        if not par_count[level][current][previous].has_key(next):
+        if next not in par_count[level][current][previous]:
           par_count[level][current][previous][next] = 0
 
         par_count[level][current][previous][next] += weight

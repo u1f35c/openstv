@@ -618,7 +618,7 @@ adequately represent the electorate until the next election.
     # winner.
 
     # count the number of winners
-    if not self.roundInfo[self.R].has_key("winners"):
+    if "winners" not in self.roundInfo[self.R]:
       self.roundInfo[self.R]["winners"] = ""
     potentialWinnersList = []
     for c in self.continuing:
@@ -666,10 +666,10 @@ adequately represent the electorate until the next election.
     elif self.roundInfo[self.R]["action"][0] == "eliminate":
       text = self.roundInfo[self.R]["eliminate"]
       
-    if self.roundInfo[self.R].has_key("quota"):
+    if "quota" in self.roundInfo[self.R]:
       text += self.roundInfo[self.R]["quota"]
     
-    if self.roundInfo[self.R].has_key("winners"):
+    if "winners" in self.roundInfo[self.R]:
       text += self.roundInfo[self.R]["winners"]
       
     # Explain what will happen in the next round
